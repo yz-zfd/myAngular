@@ -1,0 +1,18 @@
+angular：
+  1.node_modules中保存的是angular自带的包和第三方包，项目中用npm下载的包
+  都是下载到该文件夹下（类似web项目下的lib文件夹）
+  2.package.json文件是一个包引用的json文件里面表面了本项目引用了
+  哪些包，在该文件中dependencies下配置的是用于开发环境的，devdependencies下的都是
+  引用不用于生产环境（该文件的作用类似于maven的pox.xml文件，以及eclipse中的添加到配置引用路径）
+
+  3.在下载引用包时（在项目根路径下）:
+   npm install "packagename" --save 表示该包引用写入package.json中的dependencies对象
+   npm install "packagename" --save 表示该包引用写入package.json中的devDependencies对象中
+
+  4.angular-cli.json 是 Angular命令行工具的配置文件在下载完像jquery与bootstrap后需要将他们的相对路径写入
+  到angular-cli.json 下的 styles与scripts中去：
+  styles中就是我们要引入的css
+  scripts中就是我们要引入的js
+  5.在下载完包，加完依赖后，还不能直接用，因为语言的不同（Angular是typeScript开发的）必须安装他们的类型描述文件
+  npm install @types/jquery --save-dev,下载完后将类型写入到tsconfig.app.json中去
+  6.
