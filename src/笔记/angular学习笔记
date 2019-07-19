@@ -1,4 +1,4 @@
-angular：
+angular配置：
   1.node_modules中保存的是angular自带的包和第三方包，项目中用npm下载的包
   都是下载到该文件夹下（类似web项目下的lib文件夹）
   2.package.json文件是一个包引用的json文件里面表面了本项目引用了
@@ -7,12 +7,54 @@ angular：
 
   3.在下载引用包时（在项目根路径下）:
    npm install "packagename" --save 表示该包引用写入package.json中的dependencies对象
-   npm install "packagename" --save 表示该包引用写入package.json中的devDependencies对象中
+   npm install "packagename" --save-dev 表示该包引用写入package.json中的devDependencies对象中
 
-  4.angular-cli.json 是 Angular命令行工具的配置文件在下载完像jquery与bootstrap后需要将他们的相对路径写入
+  4.angular-cli.json 是 Angular命令行工具的配置文件（现在宝贝angular.json替代）在下载完像jquery与bootstrap后需要将他们的相对路径写入
   到angular-cli.json 下的 styles与scripts中去：
   styles中就是我们要引入的css
   scripts中就是我们要引入的js
   5.在下载完包，加完依赖后，还不能直接用，因为语言的不同（Angular是typeScript开发的）必须安装他们的类型描述文件
   npm install @types/jquery --save-dev,下载完后将类型写入到tsconfig.app.json中去
-  6.
+  6.angular6 后没有angular.cli.json文件了，只有angular.json文件了，而且路径配置好像也以配置文件为准了(以前以src)
+  Angular核心：组件。组件可以注入服务。
+angular基础：
+  1.组件：是Angular的基本构件块
+  2.3类文件：.ts文件中定义了商品的信息以及这些商品具有的方法，类似java中的类
+  	.html不做解释，前端显示
+
+  3.*ngFor 是一个 "结构型指令"。结构型指令会通过添加、删除和操纵它们的宿主元素等方式塑造或（类似JSTL的for：）重塑 55DOM 的结构。任何带有 * 的指令都是结构型指令,注意：结构性指令都采用的驼峰命名。
+  //
+  4.插值语法类似于el，把值通过{{对象.属性}}的方式取出
+  //
+  5.属性绑定：[]=value，[sex]=men表示为某个类型的sex赋值men。
+  //
+  6.事件绑定：（事件）="定义的方法"，(click)="share()" 表示将某个标签的click事件绑定到share（）方法上，注意：当上下文有某个对象时，传参可以直接加到方法中去，不需要用+号来隔开（拼接参数），直接(click)="myshare(product)"就行
+  //
+  7.
+  组件包含三部分：
+
+  一个组件类，它用来处理数据和功能。上一节，我们在组件类中定义了商品数据和 share() 方法。
+
+  一个 HTML 模板，它决定了用户的呈现方式。在上一节中，你修改了商品列表的 HTML 模板，以显示每个商品的名称、描述和 “Share” 按钮。
+
+  组件专属的样式定义了外观和感觉。商品列表中还没有定义任何样式。(官方的解释)
+  //
+  8.index.html主要加载:主应用程序组件（模块化中最外层模块）类似于代码中的main函数
+  9.在组件中引入包的指令：import { Component } from '@angular/core';@angular/core这个配置在backage.json中
+  所有可以不用通过去引用实际的路径导入。
+  10.@Component({
+       selector: 'app-driver-list',
+       templateUrl: './driver-list.component.html',
+       styleUrls: ['./driver-list.component.css']
+     })
+     @Drirective ( {
+       selector: 'input[log-directive ]’表示对有input元素和log-directive属性的元素起作用
+       host: {
+          'input' ：'oninput（$event ）' host表示要附加指令的元素
+        }
+     })
+     class logDrirective（）{
+        onInput（event）{ 真正要处理事件的程序。
+        }
+     }
+  @Component注解更像是一种配置对组件的配置，而@Drirective更像是一种装饰，将已经存在的标签或组件增强。

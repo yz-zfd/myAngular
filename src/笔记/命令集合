@@ -1,0 +1,7 @@
+1.npm install "packageName" --save
+下载第三方的包，--save表示用于生产环境 --save-dev表示用于开发环境，下载之后一般将他们的相对路径写入到angular.json
+2.npm install @types/jquery --save-dev
+下载类型描述文件，告知TypeScript该包的开发语言 ,下载完后将类型写入到tsconfig.app.json中去
+3.ng g(general) c(component) "name"
+创建一个组件
+
