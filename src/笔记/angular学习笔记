@@ -9,13 +9,19 @@ angular配置：
    npm install "packagename" --save 表示该包引用写入package.json中的dependencies对象
    npm install "packagename" --save-dev 表示该包引用写入package.json中的devDependencies对象中
 
-  4.angular-cli.json 是 Angular命令行工具的配置文件（现在宝贝angular.json替代）在下载完像jquery与bootstrap后需要将他们的相对路径写入
+  4.angular-cli.json 是 Angular命令行工具的配置文件（现在被angular.json替代）在下载完像jquery与bootstrap后需要将他们的相对路径写入
   到angular-cli.json 下的 styles与scripts中去：
   styles中就是我们要引入的css
   scripts中就是我们要引入的js
   5.在下载完包，加完依赖后，还不能直接用，因为语言的不同（Angular是typeScript开发的）必须安装他们的类型描述文件
   npm install @types/jquery --save-dev,下载完后将类型写入到tsconfig.app.json中去
-  6.angular6 后没有angular.cli.json文件了，只有angular.json文件了，而且路径配置好像也以配置文件为准了(以前以src)
+  值得注意的是：这是对应外部的包（非typescript开发的）才需要的东西@types类型描述文件。但是并不是每一个插件都有@types
+  所以第二种解决方法：
+  Steps1：引入WX的SDK文件
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+   Steps2：声明变量wx
+
+  6.angular6 后没有angular.cli.json文件了，只有angular.json文件了，而且路径配置路径好像也以配置文件为准了(以前以src)
   Angular核心：组件。组件可以注入服务。
 angular基础：
   1.组件：是Angular的基本构件块
@@ -58,3 +64,7 @@ angular基础：
         }
      }
   @Component注解更像是一种配置对组件的配置，而@Drirective更像是一种装饰，将已经存在的标签或组件增强。
+  import 导入模块时，先会在映射文件中匹配映射，找不到会将其当做一个完整的路径去找。
+
+  1.先实现数据展示：使用angular的table组件
+
