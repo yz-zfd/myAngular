@@ -67,4 +67,68 @@ angular基础：
   import 导入模块时，先会在映射文件中匹配映射，找不到会将其当做一个完整的路径去找。
 
   1.先实现数据展示：使用angular的table组件
+三：
+  Angular Route 路由
+  Routes 、 RouterOutlet、 Router、 RouterLink、ActivatedRoute
+  Routes：路由配置器：保存着哪个URL对应展示哪个组件以及在哪个RouterOutlet
+  RouterOutlet：在html中标记路由内容呈现的位置的占位符指令
+  Router：负责在运行时执行路由的对象，可以通过调用其navigate()和navigateByUrl()方法来导航到一个指定的路由
+  RouterLink：在html中申明路由导航用的指令
+  ActivatedRoute：当前激活的路由对象，保存着当前路由的信息，如路由地址，路由参数
+
+
+数据绑定：
+<input (input)="onInputEvent($event)">
+:表示当input标签的input事件被触发时调用组件控制器中的onInoutEvent方法
+<inpout (click)="saved = true">
+也可以直接就对控制器中的属性赋值
+
+{{}}与[]=""类似的（在标签属性绑定时）
+要注意dom属性与html属性的区别：
+dom属性是对象属性实时在变，html只指定初始值
+比如在：<button disabled/>禁用属性，此属性为html属性，即使设置<button disabled="false"/>依旧不可用
+
+html属性与Dom属性的关系：
+不是同一个东西，html指定初值，dom指定当前值，有些标签两个属性有对应关系，angular中绑定的是dom属性值
+
+html属性绑定：
+<td [attr.colspan]="tableColspan">something </td>
+class属性：
+1.完全替换
+基本html绑定：<div class="aaa bbb" [class]="someExpression"
+2.部分替换
+
+双向绑定[()]="mode";
+管道：对初始值进行处理然后显示
+1.日期管道
+2.number管道
+3.异步流管道
+...
+自定义管道，通过ng命令
+无论是组件还是管道都要在app.module.ts中声明
+
+
+ [nzData]="listOfAllData"
+  <!--翻页事件与currentPageDataChange($event)方法绑定-->
+      nzShowCheckbox
+      <!--双向绑定，当选中或取消全选框后，通过nzChecked事件将isAllDisplayDataChecked变为true或false（可能是鼠标点击来确定）-->
+      [(nzChecked)]="isAllDisplayDataChecked"
+      <!--部分选中属性与isIndeterminate，这个属性主要是控制Checkbox的ui-->
+      [nzIndeterminate]="isIndeterminate"
+      <!--选择改变事件，与checkAll方法绑定-->
+      (nzCheckedChange)="checkAll($event)"
+
+<td
+      nzShowCheckbox
+      <!--这里是一个双向绑定数据的方法nzChecked，当鼠标点击改变选中状态时，mapOfCheckedId中对应的值也会更改-->
+      [(nzChecked)]="mapOfCheckedId[data.id]"
+      <!--这是当选中状态更改后，通知页面刷新-->
+      (nzCheckedChange)="refreshStatus()"
+    >
+
+
+
+
+
+
 

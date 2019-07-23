@@ -1,27 +1,52 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div align="center"><h1>127.0.0.1:4200</h1></div>
-<div class="container">
-  <nz-table #myTable [nzData]="driverDatas">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Address</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let data of myTable.data">
-      <td>{{data.name}}</td>
-      <td>{{data.age}}</td>
-      <td>{{data.address}}</td>
-      <td>
-        <a>Action - {{data.name}}</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a>Delete</a>
-      </td>
-    </tr>
-    </tbody>
-  </nz-table>
-</div>
+<div align="center"><h1>"127.0.0.1:4200"</h1></div>
+<!--////////////////////////////////////////////////////////////////-->
+<nz-table
+  #rowSelectionTable
+  nzShowPagination
+  nzBordered
+  [nzData]="listOfAllData"
+  (nzCurrentPageDataChange)="currentPageDataChange($event)"
+>
+  <thead>
+  <tr>
+    <th
+      nzShowCheckbox
+      [(nzChecked)]="isAllDisplayDataChecked"
+      [nzIndeterminate]="isIndeterminate"
+      (nzCheckedChange)="checkAll($event)"
+    ></th>
+    <th>姓名</th>
+    <th>国籍</th>
+    <th>号码</th>
+    <th>婚姻状态</th>
+    <th>身份证号</th>
+    <th>所属公司</th>
+    <th>性别</th>
+    <th>外语能力</th>
+    <th>出生日期</th>
+    <th>教育程度</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of rowSelectionTable.data">
+    <td
+      nzShowCheckbox
+      [(nzChecked)]="mapOfCheckedId[data.id]"
+      (nzCheckedChange)="refreshStatus()"
+    ></td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.nationality }}</td>
+    <td>{{ data.phone_number }}</td>
+    <td>{{ data.marital_status }}</td>
+    <td>{{ data.person_id }}</td>
+    <td>{{ data.company }}</td>
+    <td>{{ data.sex }}</td>
+    <td>{{ data.foreign_language_ability }}</td>
+    <!--管道用于修改date类型-->
+    <td>{{ data.birthday |date:"yyyy-MM-dd"}}</td>
+    <td>{{ data.education }}</td>
 
+  </tr>
+  </tbody>
+</nz-table>
