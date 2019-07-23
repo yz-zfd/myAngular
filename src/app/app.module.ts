@@ -10,13 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { DriverDetailComponent } from './driver-detail/driver-detail.component';
+import {RouterModule} from '@angular/router';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    DriverListComponent
+    DriverListComponent,
+    DriverDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,11 @@ registerLocaleData(en);
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot([
+      {path:"",component:DriverListComponent},
+      {path:"driver/:data.id",component:DriverDetailComponent}
+    ])
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

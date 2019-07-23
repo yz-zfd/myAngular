@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import {drivers} from '../drivers';
 
 //定义一个数据类型接口，要求所有数据满足这种形式
 export interface Data {
@@ -44,7 +45,7 @@ export class DriverListComponent implements OnInit {
     this.refreshStatus();
   }
   refreshStatus():void{
-    /*当前展示的数据是否都被选中(主要用于在字段上的checkbox的ui展示)：首先将页面上所有数据进行过滤1.过滤掉为null的数据，然后判断剩下的数据是否所有
+    /*当前展示的数据是否都被选中(主要用于在字段上的checkbox的ui展示效果)：首先将页面上所有数据进行过滤1.过滤掉为null的数据，然后判断剩下的数据是否所有
     是否都在mapOfCheckedId[]中(是否全被选中，every()方法返回的应该是boolean类型)。这里将判断集合改为全部数据*/
     this.isAllDisplayDataChecked=this.listOfAllData.
     filter(item=>item).every(item=>this.mapOfCheckedId[item.id]);

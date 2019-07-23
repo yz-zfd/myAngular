@@ -35,7 +35,7 @@
       [(nzChecked)]="mapOfCheckedId[data.id]"
       (nzCheckedChange)="refreshStatus()"
     ></td>
-    <td>{{ data.name }}</td>
+    <td><a [title]="data.name+'详情'" [routerLink]="['/driver',data.id]"  >{{ data.name }}</a></td>
     <td>{{ data.nationality }}</td>
     <td>{{ data.phone_number }}</td>
     <td>{{ data.marital_status }}</td>
@@ -50,3 +50,4 @@
   </tr>
   </tbody>
 </nz-table>
+<router-outlet></router-outlet>

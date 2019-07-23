@@ -126,6 +126,17 @@ class属性：
       (nzCheckedChange)="refreshStatus()"
     >
 
+路由：SPA（类似Python的Django）
+ 传递参数的三种方式：
+ 1.在查询参数中传递数据
+ {path:"driver/:id",component:DriverDetailComponent} =>在目标路由中通过ActivateRoute.parems[id]拿
+ 2.在路由路径中传递数据
+ /path?id=1  => 在目标路由中通过ActivateRoute.query("id")拿到
+ 3.在路由配置中传递参数
+ 一般传递一些静态参数
+ {path:"driver/:data.id",component:DriverDetailComponent，data:[{id:0}]}
+ [routerLink]是在html中配置路由
+ router是在控制器中控制路由
 
 
 
