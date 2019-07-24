@@ -1,22 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import {drivers} from '../drivers';
+import { IDriver,Drivers } from '../drivers';
+import { BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
+import {DriverDetailComponent} from '../driver-detail/driver-detail.component';
 
 //定义一个数据类型接口，要求所有数据满足这种形式
-export interface Data {
-  id:number;
-  name:string;
-  nationality:string;
-  phone_number:string;
-  marital_status:boolean;
-  person_id:string;
-  company:string;
-  sex:string;
-  foreign_language_ability:string;
-  birthday:Date;
-  education:string;
-  photo:string;
-}
+
 @Component({
   selector: 'app-driver-list',
   templateUrl: './driver-list.component.html',
@@ -30,15 +19,32 @@ export class DriverListComponent implements OnInit {
   //是否部分选中
   isIndeterminate=false;
   //本页显示的数据
-  listOfDisplayData:Data[]=[];
-  //所有数据
-  listOfAllData:Data[]=[];
+  listOfDisplayData:IDriver[]=[];
+  //所有数据对象
+  listOfAllData:IDriver[]=[];
+
   //数据是否选中的映射集合，key为数据id，value为是否选中
   mapOfCheckedId:{ [key:string]:boolean }={};
   //初始选中的数据数量。
   numberOfChecked=0;
+
+  //------------------------------------modal------------------------------------//
+  modalRef:BsModalRef;
+  //注入BsModalService对象
+  constructor(private modalService:BsModalService){}
+  //前端传递参数可以不在意名称，下面必须在意
+  openDetailModal(driverInfo:IDriver){
+    //将一条记录发过来，是一条记录所以是IDriver类型,值得注意是下面的"diver"应当在目标modal中
+    //有相应的属性名
+    const initialState ={
+      "diver":driverInfo,
+    };
+    this.modalRef=this.modalService.show(DriverDetailComponent,{ initialState ,class:"gray modal-lg"});
+  }
+  //--------------------------------------modal----------------------------------//
+
   //点击翻页之后触发的事件，$event:Data[]意为从该事件中取出翻页后的数据
-  currentPageDataChange($event:Data[]):void{
+  currentPageDataChange($event:IDriver[]):void{
     //将改变后的数据重新赋值给当前显示数据
     this.listOfDisplayData=$event;
     //然后刷新页面
@@ -95,6 +101,8 @@ export class DriverListComponent implements OnInit {
 
       })
     }
+    //对Drivers进行初始化
+    Drivers.driverList=this.listOfAllData;
   }
 }
 

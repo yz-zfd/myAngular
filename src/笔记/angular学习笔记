@@ -126,6 +126,7 @@ class属性：
       (nzCheckedChange)="refreshStatus()"
     >
 
+
 路由：SPA（类似Python的Django）
  传递参数的三种方式：
  1.在查询参数中传递数据

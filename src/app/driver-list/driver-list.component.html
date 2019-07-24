@@ -29,25 +29,25 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of rowSelectionTable.data">
+  <tr *ngFor="let driver of rowSelectionTable.data">
     <td
       nzShowCheckbox
-      [(nzChecked)]="mapOfCheckedId[data.id]"
+      [(nzChecked)]="mapOfCheckedId[driver.id]"
       (nzCheckedChange)="refreshStatus()"
     ></td>
-    <td><a [title]="data.name+'详情'" [routerLink]="['/driver',data.id]"  >{{ data.name }}</a></td>
-    <td>{{ data.nationality }}</td>
-    <td>{{ data.phone_number }}</td>
-    <td>{{ data.marital_status }}</td>
-    <td>{{ data.person_id }}</td>
-    <td>{{ data.company }}</td>
-    <td>{{ data.sex }}</td>
-    <td>{{ data.foreign_language_ability }}</td>
+    <td><a href="#" [title]="'详情请点击'" (click)="openDetailModal(driver)">{{ driver.name }}</a></td>
+    <td>{{ driver.nationality }}</td>
+    <td>{{ driver.phone_number }}</td>
+    <td>{{ driver.marital_status }}</td>
+    <td>{{ driver.person_id }}</td>
+    <td>{{ driver.company }}</td>
+    <td>{{ driver.sex }}</td>
+    <td>{{ driver.foreign_language_ability }}</td>
     <!--管道用于修改date类型-->
-    <td>{{ data.birthday |date:"yyyy-MM-dd"}}</td>
-    <td>{{ data.education }}</td>
-
+    <td>{{ driver.birthday | date:"yyyy-MM-dd"}}</td>
+    <td>{{ driver.education }}</td>
   </tr>
   </tbody>
 </nz-table>
-<router-outlet></router-outlet>
+
+

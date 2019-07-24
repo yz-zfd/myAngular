@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { DriverDetailComponent } from './driver-detail/driver-detail.component';
 import {RouterModule} from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 registerLocaleData(en);
 
@@ -31,7 +32,8 @@ registerLocaleData(en);
     RouterModule.forRoot([
       {path:"",component:DriverListComponent},
       {path:"driver/:data.id",component:DriverDetailComponent}
-    ])
+    ]),
+    ModalModule.forRoot()
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
