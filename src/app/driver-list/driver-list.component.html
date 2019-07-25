@@ -45,7 +45,7 @@
     <td><a href="#" [title]="'详情请点击'" (click)="openDetailModal(driver)">{{ driver.name }}</a></td>
     <td>{{ driver.nationality }}</td>
     <td>{{ driver.phone_number }}</td>
-    <td>{{ driver.marital_status }}</td>
+    <td>{{ driver.marital_status | boolToString}}</td>
     <td>{{ driver.person_id }}</td>
     <td>{{ driver.company }}</td>
     <td>{{ driver.sex }}</td>

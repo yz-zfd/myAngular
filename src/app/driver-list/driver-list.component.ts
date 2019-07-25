@@ -126,7 +126,7 @@ export class DriverListComponent implements OnInit {
         name:"张山山"+i,
         nationality:"中国",
         phone_number:"135"+(j+i)+"3588",
-        marital_status:false,
+        marital_status:true,
         person_id:"513022"+(j+i)+"02016694",
         company:"yz",
         sex:"男",
