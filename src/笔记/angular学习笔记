@@ -139,7 +139,11 @@ class属性：
  [routerLink]是在html中配置路由
  router是在控制器中控制路由
 
+使用modal分两步：1.在准备组件中先申明modalRef:BsModalRef;利用自动注入一个private modalService:BsModalService，
+然后使用this.modalRef=this.modalService.show(DriverDetailComponent）
+2.在目标组件中使用自动注入注入一个public modalRef:BsModalRef
 
+注意在表单中为value绑定值时使用[value]与value的区别很大，若是数据为空[value]写法容易报错
 
 
 

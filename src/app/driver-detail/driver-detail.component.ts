@@ -11,7 +11,10 @@ import {BsModalRef} from 'ngx-bootstrap';
 })
 export class DriverDetailComponent implements OnInit {
 
-  diver:IDriver;
+  driver:IDriver;
+  modalHeaderText:string;
+  modalFooterText:string;
+  editorStatus:string;
   constructor(public modalRef:BsModalRef) {
   }
   ngOnInit(): void {

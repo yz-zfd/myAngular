@@ -13,6 +13,8 @@ import en from '@angular/common/locales/en';
 import { DriverDetailComponent } from './driver-detail/driver-detail.component';
 import {RouterModule} from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {OprateTipsModalComponent} from './oprate-tips-modal/oprate-tips-modal.component';
+
 
 registerLocaleData(en);
 
@@ -20,7 +22,11 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     DriverListComponent,
-    DriverDetailComponent
+    DriverDetailComponent,
+    OprateTipsModalComponent
+  ],
+  entryComponents:[
+    OprateTipsModalComponent
   ],
   imports: [
     BrowserModule,

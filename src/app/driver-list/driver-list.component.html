@@ -1,6 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div align="center"><h1>"127.0.0.1:4200"</h1></div>
 <!--////////////////////////////////////////////////////////////////-->
+<nz-button-group>
+  <button nz-button nzType="primary" (click)="addDriver()">添加</button>
+</nz-button-group>
+<nz-button-group>
+  <button nz-button nzType="primary" (click)="editorDriver()">编辑</button>
+</nz-button-group>
+<br/>
 <nz-table
   #rowSelectionTable
   nzShowPagination

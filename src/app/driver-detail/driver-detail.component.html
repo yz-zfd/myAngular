@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">详情</h4>
+  <h4 class="modal-title pull-left">{{modalHeaderText}}</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -10,69 +10,93 @@
     <input style="display: none"/>
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-xs-6">
-        <div class="input-group">
-          <span class="input-group-addon">* 姓 名 </span>
-          <input class="form-control" type="text"/>
+        <!--angular中的输入框组改变了，不再是之前的那种写法，奇怪的是同样的版本为什么这里就不行了-->
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">*姓名 </span>
+          </div>
+          <input class="form-control" type="text" [disabled]="editorStatus" value="{{driver.name}}"/>
         </div>
         <br/>
-        <div class="input-group">
-          <span class="input-group-addon">* 手机号</span>
-          <input id="phone_number" name="phone_number" class="form-control" type="text"/>
+
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">*手机号</span>
+          </div>
+          <input  class="form-control" type="text" [disabled]="editorStatus" value="{{driver.phone_number}}" />
         </div>
         <br/>
-        <div class="input-group">
-          <span class="input-group-addon">*身份证号</span>
-          <input id="person_id" name="person_id" class="form-control" type="text"/>
+
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">*身份证</span>
+          </div>
+          <input  class="form-control" type="text" [disabled]="editorStatus" value="{{driver.person_id}}" />
         </div>
         <br/>
-        <div class="input-group">
-          <span class="input-group-prepend">* 性 别 </span>
-          <select id="sex" class="form-control" name="sex">
-            <option>男</option>
-            <option>女</option>
+
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">*性 别</span>
+          </div>
+          <select id="sex" class="form-control" name="sex" [disabled]="editorStatus" value="{{driver.sex}}">
+            <option value="女">女</option>
+            <option value="男">男</option>
           </select>
         </div>
         <br/>
-        <div class="input-group">
-          <span class="inp">*出生日期</span>
-          <input id="birthday" name="birthday" style="background-color: white" class="form-control" type="text"
-                 readonly/>
+
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">*出生日期</span>
+          </div>
+          <input style="background-color: white" class="form-control" type="text"
+                 readonly [disabled]="editorStatus" value="{{driver.birthday |date:'yyyy-MM-dd'}}"/>
         </div>
         <br/>
       </div>
       <div class="col-xs-4 col-sm-4 col-xs-6">
         <div class="input-group input-group-sm">
-          <span class="inp">*国籍</span>
-          <input id="nationality" name="nationality" class="form-control" type="text"/>
+          <div class="input-group-prepend">
+            <span class="input-group-text">*国籍</span>
+          </div>
+          <input class="form-control" type="text" [disabled]="editorStatus" value="{{driver.nationality}}"/>
         </div>
         <br/>
-        <div class="input-group">
-          <span class="input-g">*婚姻状态</span>
-          <select id="marital_status" class="form-control" name="marital_status">
-            <option>未婚</option>
-            <option>已婚</option>
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">*婚姻状态</span>
+          </div>
+          <select  class="form-control" name="marital_status" [disabled]="editorStatus" value="{{driver.marital_status}}">
+            <option value="false">未婚</option>
+            <option value="true">已婚</option>
           </select>
         </div>
         <br/>
-        <div class="input-group">
-          <span class="input-group-addon">*所属单位</span>
-          <input id="company" name="company" class="form-control" type="text"/>
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">*所属单位</span>
+          </div>
+          <input  class="form-control" type="text" [disabled]="editorStatus" value="{{driver.company}}"/>
         </div>
         <br/>
-        <div class="input-group">
-          <span class="input-group-addon">外语能力</span>
-          <input id="foreign_language_ability" name="foreign_language_ability" class="form-control" type="text"
-                 value=""/>
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">外语能力</span>
+          </div>
+          <input class="form-control" type="text" [disabled]="editorStatus" value="{{driver.foreign_language_ability}}" />
         </div>
         <br/>
-        <div class="input-group">
-          <span class="input-group-addon"> 学 历 </span>
-          <input id="education" name="education" class="form-control" type="text" value=""/>
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> 学 历 </span>
+          </div>
+          <input class="form-control" type="text" [disabled]="editorStatus" value="{{driver.education}}"/>
         </div>
         <br/>
       </div>
       <div class="col-xs-4 col-sm-4 col-xs-6 ">
-        <%&#45;&#45;img用于图片回显&#45;&#45;%>
+        <!--img用于图片回显-->
         <div align="center">
           <img id="photoImg" src=""/>
         </div>
@@ -81,7 +105,7 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modalRef.hide()">提交</button>
+  <button type="button" class="btn btn-primary" [disabled]="editorStatus" data-dismiss="modal" (click)="modalRef.hide()">{{modalFooterText}}</button>
 </div>
 
 
