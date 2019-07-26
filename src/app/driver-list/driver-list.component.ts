@@ -48,12 +48,11 @@ export class DriverListComponent implements OnInit {
     this.modalRef=this.modalService.show(DriverDetailComponent,{ initialState ,class:"gray modal-lg"});
   }
   addDriver(){
-    var driverInfo:IDriver = this.listOfAllData[0];
     const initialState ={
       "modalHeaderText":"添加(*必填)",
       "driver":new Driver(),
       "modalFooterText":"点击提交",
-      "editorStatus":""
+      "editorStatus":false
     };
     this.modalRef=this.modalService.show(DriverDetailComponent,{initialState ,class:"gray modal-lg"})
   }

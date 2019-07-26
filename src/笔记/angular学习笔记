@@ -148,4 +148,7 @@ class属性：
 
 注意在表单中为value绑定值时使用[value]与value的区别很大，若是数据为空,[value]写法容易报错
 
+当[(ngModal)]="属性"用到input上时，驱动事件为input事件，实现双向绑定
+
+http服务：
 

@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'boolToString'
 })
 export class BoolToStringPipe implements PipeTransform {
-
   transform(value: any): any {
     var marital_statusl;
     if (value){
@@ -14,5 +13,6 @@ export class BoolToStringPipe implements PipeTransform {
     }
     return marital_statusl;
   }
-
 }
+
+

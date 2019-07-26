@@ -10,12 +10,12 @@
     <input style="display: none"/>
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-xs-6">
-        <!--angular中的输入框组改变了，不再是之前的那种写法，奇怪的是同样的版本为什么这里就不行了-->
+        <!--angular中使用bootstrap的输入框组方式改变了，不再是之前的那种写法，奇怪的是同样的版本为什么这里就不行了-->
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text">*姓名 </span>
           </div>
-          <input name="name" class="form-control" type="text" [disabled]="editorStatus" value="{{driver.name}}" (change)="check($event)"/>
+          <input name="name" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.name"/>
         </div>
         <br/>
 
@@ -23,7 +23,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*手机号</span>
           </div>
-          <input name="phone_number" class="form-control" type="text" [disabled]="editorStatus" value="{{driver.phone_number}}" />
+          <input name="phone_number" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.phone_number"/>
         </div>
         <br/>
 
@@ -31,7 +31,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*身份证</span>
           </div>
-          <input name="phone_number" class="form-control" type="text" [disabled]="editorStatus" value="{{driver.person_id}}" />
+          <input name="person_id" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.person_id" (change)="setBirthday()"/>
         </div>
         <br/>
 
@@ -39,7 +39,9 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*性 别</span>
           </div>
-          <select id="sex" class="form-control" name="sex" [disabled]="editorStatus" value="{{driver.sex}}">
+          <!--注意这里使用[value],还是value差别很大，使用前者会随着控制器中绑定数据的改变而改变，后者不会。
+          后者实际上绑定的是html属性值（但实际不影响，因为表单提交的是dom属性值）-->
+          <select name="sex" class="form-control" [disabled]="editorStatus" [value]="driver.sex">
             <option value="女">女</option>
             <option value="男">男</option>
           </select>
@@ -50,8 +52,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*出生日期</span>
           </div>
-          <input style="background-color: white" class="form-control" type="text"
-                 readonly [disabled]="editorStatus" value="{{driver.birthday |date:'yyyy-MM-dd'}}"/>
+          <input name="birthday" style="background-color: white" class="form-control" type="text"
+                 readonly [disabled]="editorStatus" [value]="driver.birthday | date : 'yyyy-MM-dd'"/>
         </div>
         <br/>
       </div>
@@ -60,14 +62,14 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*国籍</span>
           </div>
-          <input class="form-control" type="text" [disabled]="editorStatus" value="{{driver.nationality}}"/>
+          <input name="nationality" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.nationality"/>
         </div>
         <br/>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text">*婚姻状态</span>
           </div>
-          <select  class="form-control" name="marital_status" [disabled]="editorStatus" value="{{driver.marital_status}}">
+          <select name="marital_status" class="form-control" [disabled]="editorStatus" [value]="driver.marital_status">
             <option value="false">未婚</option>
             <option value="true">已婚</option>
           </select>
@@ -77,21 +79,21 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*所属单位</span>
           </div>
-          <input  class="form-control" type="text" [disabled]="editorStatus" value="{{driver.company}}"/>
+          <input  name="company" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.company"/>
         </div>
         <br/>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text">外语能力</span>
           </div>
-          <input class="form-control" type="text" [disabled]="editorStatus" value="{{driver.foreign_language_ability}}" />
+          <input name="foreign_language_ability" class="form-control" type="text" [disabled]="editorStatus" [value]="driver.foreign_language_ability" />
         </div>
         <br/>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text"> 学 历 </span>
           </div>
-          <input class="form-control" type="text" [disabled]="editorStatus" value="{{driver.education}}"/>
+          <input name="education" class="form-control" type="text" [disabled]="editorStatus" [value]="driver.education"/>
         </div>
         <br/>
       </div>
