@@ -6,6 +6,8 @@ import {DriverDetailComponent} from '../driver-detail/driver-detail.component';
 import {initialState} from 'ngx-bootstrap/timepicker/reducer/timepicker.reducer';
 import {OprateTipsModalComponent} from '../oprate-tips-modal/oprate-tips-modal.component';
 import {driverInformations} from '../driverInformations';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 //定义一个数据类型接口，要求所有数据满足这种形式
 
@@ -31,17 +33,18 @@ export class DriverListComponent implements OnInit {
   mapOfCheckedId:{ [key:string]:boolean }={};
   //初始选中的数据数量。
   numberOfChecked=0;
-
+  //http流
+  dataStream:Observable<any>;
   //------------------------------------modal------------------------------------//
   modalRef:BsModalRef;
   //注入BsModalService对象
-  constructor(private modalService:BsModalService){}
+  constructor(private modalService:BsModalService,private http:HttpClient){}
   //前端传递参数可以不在意名称，下面必须在意类似键值对的方式
   openDetailModal(driverInfo:IDriver){
     //将一条记录发过来，是一条记录所以是IDriver类型,值得注意是下面的"driver"应当在目标modal中有相应的属性名
     const initialState ={
       "modalHeaderText":"详情(只读)",
-      "driver":driverInfo,
+      "driverSource":driverInfo,
       "modalFooterText":"不可更改",
       "editorStatus":"disabled"
     };
@@ -50,7 +53,7 @@ export class DriverListComponent implements OnInit {
   addDriver(){
     const initialState ={
       "modalHeaderText":"添加(*必填)",
-      "driver":new Driver(),
+      "driverSource":new Driver(),
       "modalFooterText":"点击提交",
       "editorStatus":false
     };
@@ -62,7 +65,7 @@ export class DriverListComponent implements OnInit {
     if (this.listOfCheckedData.length==1){
       const initialState={
         "modalHeaderText":"编辑页",
-        "driver" :this.listOfCheckedData[0] ,
+        "driverSource" :this.listOfCheckedData[0] ,
         "modalFooterText":"提交更改",
       }
       this.modalRef=this.modalService.show(DriverDetailComponent,{ initialState,class:"gray modal-lg"})
@@ -103,21 +106,15 @@ export class DriverListComponent implements OnInit {
     this.listOfAllData.filter(item=>item).forEach(item => (this.mapOfCheckedId[item.id] = value));
     this.refreshStatus();
   }
-  //对数据进行操作后触发的方法
-  /*operateData():void{
-    this.isOperating=true;
-    setTimeout(() => {
-      //在操作后清空选中。
-      this.listOfAllData.forEach(item =>(this.mapOfCheckedId[item.id] = false));
-      //刷新页面
-      this.refreshStatus();
-      //将操作状态改为false
-      this.isOperating=false;
-    },1000);
-  }*/
   //初始化数据
   ngOnInit(): void{
-    let j=1900;
+    this.dataStream=this.http.get("http://localhost:8080/getAllDriver");
+    this.dataStream.subscribe(
+      (data)=>{
+        this.listOfAllData=data;
+      }
+    )
+    /*let j=1900;
     for(let i=0;i<100;i++) {
       this.listOfAllData.push({
         //"张山山","中国","135"+(j+i)+"3588",false,"513022"+(j+i)+"02016694","yz","男","good",new Date(sdf.parse((j+i)+"-02-01").getTime()+24*3600*1000),"本科"
@@ -132,13 +129,9 @@ export class DriverListComponent implements OnInit {
         foreign_language_ability:"good",
         birthday:new Date(),
         education:"九年义务教育",
-        photo:"c://"
-
-      })
+        photo:"c://",
+      })*/
     }
-    //对Drivers进行初始化
-    Drivers.driverList=this.listOfAllData;
   }
-}
 
 

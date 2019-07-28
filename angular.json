@@ -32,10 +32,12 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "./node_modules/bootstrap-table/dist/bootstrap-table.css",
+              "./node_modules/bootstrap-fileinput/css/fileinput.css",
               "src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
+              "./node_modules/bootstrap-fileinput/js/fileinput.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/jquery/dist/jquery.js",
               "./node_modules/bootstrap-table/dist/bootstrap-table.js"

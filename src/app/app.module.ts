@@ -15,6 +15,7 @@ import {RouterModule} from '@angular/router';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {OprateTipsModalComponent} from './oprate-tips-modal/oprate-tips-modal.component';
 import { BoolToStringPipe } from './pipe/bool-to-string.pipe';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -27,6 +28,7 @@ registerLocaleData(en);
     DriverDetailComponent,
     OprateTipsModalComponent,
     BoolToStringPipe,
+    LoginComponent,
   ],
   entryComponents:[
     OprateTipsModalComponent

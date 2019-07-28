@@ -4,7 +4,8 @@
     "outDir": "./out-tsc/app",
     "types": [
       "jquery",
-      "bootstrap"
+      "bootstrap",
+      "bootstrap-fileinput"
     ]
   },
   "include": [

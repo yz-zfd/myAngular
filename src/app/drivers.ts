@@ -28,6 +28,4 @@ export class Driver implements IDriver{
   birthday: Date=new Date();
   education: string="";
   photo: string="default";
-
-
 }

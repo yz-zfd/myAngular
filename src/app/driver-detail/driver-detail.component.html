@@ -1,3 +1,4 @@
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
 <div class="modal-header">
   <h4 class="modal-title pull-left">{{modalHeaderText}}</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -100,7 +101,11 @@
       <div class="col-xs-4 col-sm-4 col-xs-6 ">
         <!--img用于图片回显-->
         <div align="center">
-          <img id="photoImg" src=""/>
+          <img id="photoImg" src="http://localhost:8080/driverImg/{{driver.photo}}" (onload)="photoCut(this)"/>
+        </div>
+        <br/><br/>
+        <div class="file-input file-input-new" data-provides="fileinput" id="uploadImgDiv" align="center">
+          <input type="file" name="photo" id="photo">
         </div>
       </div>
     </div>
