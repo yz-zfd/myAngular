@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {DriverListComponent} from './driver-list/driver-list.component';
 import {en_US, NgZorroAntdModule, NZ_I18N} from 'ng-zorro-antd';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
@@ -41,10 +41,11 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      {path:"",component:DriverListComponent},
-      {path:"driver/:data.id",component:DriverDetailComponent}
+      {path: '', component: LoginComponent},
+      {path:'driverList/' , component:DriverListComponent},
     ]),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

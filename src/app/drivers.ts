@@ -15,6 +15,11 @@ export interface IDriver {
 export class Drivers {
   static driverList:IDriver[]=[];
 }
+
+export class User{
+  username:string;
+  password:string;
+}
 export class Driver implements IDriver{
   id: number;
   name: string="";
