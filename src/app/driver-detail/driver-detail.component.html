@@ -1,4 +1,3 @@
-<meta http-equiv="Access-Control-Allow-Origin" content="*">
 <div class="modal-header">
   <h4 class="modal-title pull-left">{{modalHeaderText}}</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -6,8 +5,7 @@
   </button>
 </div>
 <div class="modal-body">
-  <form id="driverInfoForm" class="bs-example bs-example-form" role="form" method="post"
-        enctype="multipart/form-data">
+  <form ngForm (ngSubmit)="submitForm()" enctype="multipart/form-data">
     <input style="display: none"/>
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-xs-6">
@@ -24,7 +22,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*手机号</span>
           </div>
-          <input name="phone_number" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.phone_number"/>
+          <input name="phone_number" class="form-control" type="text" [disabled]="editorStatus"
+                 [(ngModel)]="driver.phone_number"/>
         </div>
         <br/>
 
@@ -32,7 +31,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*身份证</span>
           </div>
-          <input name="person_id" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.person_id" (change)="setBirthday()"/>
+          <input name="person_id" class="form-control" type="text" [disabled]="editorStatus"
+                 [(ngModel)]="driver.person_id" (change)="setBirthday()"/>
         </div>
         <br/>
 
@@ -63,7 +63,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*国籍</span>
           </div>
-          <input name="nationality" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.nationality"/>
+          <input name="nationality" class="form-control" type="text" [disabled]="editorStatus"
+                 [(ngModel)]="driver.nationality"/>
         </div>
         <br/>
         <div class="input-group input-group-sm">
@@ -80,40 +81,60 @@
           <div class="input-group-prepend">
             <span class="input-group-text">*所属单位</span>
           </div>
-          <input  name="company" class="form-control" type="text" [disabled]="editorStatus" [(ngModel)]="driver.company"/>
+          <input name="company" class="form-control" type="text" [disabled]="editorStatus"
+                 [(ngModel)]="driver.company"/>
         </div>
         <br/>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text">外语能力</span>
           </div>
-          <input name="foreign_language_ability" class="form-control" type="text" [disabled]="editorStatus" [value]="driver.foreign_language_ability" />
+          <input name="foreign_language_ability" class="form-control" type="text" [disabled]="editorStatus"
+                 [value]="driver.foreign_language_ability"/>
         </div>
         <br/>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text"> 学 历 </span>
           </div>
-          <input name="education" class="form-control" type="text" [disabled]="editorStatus" [value]="driver.education"/>
+          <input name="education" class="form-control" type="text" [disabled]="editorStatus"
+                 [value]="driver.education"/>
         </div>
         <br/>
       </div>
       <div class="col-xs-4 col-sm-4 col-xs-6 ">
         <!--img用于图片回显-->
         <div align="center">
-          <img id="photoImg" src="http://localhost:8080/driverImg/{{driver.photo}}" (onload)="photoCut(this)"/>
+          <img id="photoImg" src="" (onload)="photoCut(this)"/>
         </div>
         <br/><br/>
-        <div class="file-input file-input-new" data-provides="fileinput" id="uploadImgDiv" align="center">
-          <input type="file" name="photo" id="photo">
+        <div class="file" data-provides="fileinput" id="uploadImgDiv" align="center">
+          <input type="file"  class="" name="photo" id="photo" >
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-xs-6 "></div>
+      <div class="col-xs-4 col-sm-4 col-xs-6 "></div>
+      <div class="col-xs-4 col-sm-4 col-xs-6 ">
+        <div class="row">
+          <div class="col-xs-2 col-sm-2 col-xs-2">
+          </div>
+          <div class="col-xs-6 col-sm-6 col-xs-6">
+            <button nz-button class="login-form-button" [nzType]="'primary'"
+                    [disabled]="editorStatus">{{modalFooterText}}</button>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-xs-4">
+            <button type="button" class="btn btn-primary btn-sm login-form-button"  (click)="modalRef.hide()">取消</button>
+          </div>
         </div>
       </div>
     </div>
   </form>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-primary" [disabled]="editorStatus" data-dismiss="modal" (click)="submit()">{{modalFooterText}}</button>
-</div>
+
 
 
 

@@ -1,11 +1,9 @@
-
 import {Component, OnInit} from '@angular/core';
 import {Driver, IDriver} from '../drivers';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {OprateTipsModalComponent} from '../oprate-tips-modal/oprate-tips-modal.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import * as $ from "jquery";
 @Component({
   selector: 'app-driver-detail',
   templateUrl: './driver-detail.component.html',
@@ -60,7 +58,6 @@ export class DriverDetailComponent implements OnInit {
     });*/
 
   }
-  //copy方法
   //检查身份证日期格式并设置生日
   checkPersonId(personId: string): boolean {
     var birthdayLongTime = new Date(personId.slice(6, 10) + '-' + personId.slice(10, 12) + '-' + personId.slice(12, 14)).getTime();
@@ -106,26 +103,23 @@ export class DriverDetailComponent implements OnInit {
       this.checkText = '单位不能为空';
       return;
     }
-    //通过请求后台验证一下身份证与号码重复问题
-
   }
   //根据数据验证文本是否为空，确定是否提交还是弹出提示modol
   submit() {
     //进行验证数据,先设置checkText为空
     this.checkText = null;
+    this.check();
     const initialState = {
       'modalHeaderText': '提示',
       'modalBodyText': this.checkText,
       'modalFooterText': '我知道了',
       'editorStatus': ''
     };
-    this.check();
     if (this.checkText != null) {
       this.modalService.show(OprateTipsModalComponent, {initialState, class: 'gray modal-sm'});
     } else {
       //向后台提交前先验证手机号与身份证
       var status;
-      console.debug(this.driver.phone_number)
       this.dataStream=this.http.get("http://localhost:8080/personIdCheck",{params:{"personId":this.driver.person_id,"phoneNumber":this.driver.phone_number,"id":this.driver.id.toString()}});
       //使用流开启订阅,get()方法只是定义了一个请求
       this.dataStream.subscribe(
@@ -150,30 +144,7 @@ export class DriverDetailComponent implements OnInit {
   }
   submitForm(){
     console.debug("提交表單")
-    //用Ajax提交了回调中将更改添加到页面数据中去
-    //这里有错，类型不兼容
     var form=new FormData();
-   /* $.ajax({
-      url:"/operateDriver",
-      type:"post",
-      data:form,
-      processData:false,
-      contentType:false,
-      success:function (data) {
-        if(data == true){
-          return;
-        }
-        if(data == false){
-          return;
-        }
-        if(true){
-          return;
-        }
-      },
-      error:function (result) {
-
-      }
-    })*/
   }
   //图片显示---------------------------------------------------------------------------------------
   photoCut(p) {

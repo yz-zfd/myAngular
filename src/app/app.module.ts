@@ -31,6 +31,7 @@ registerLocaleData(en);
     LoginComponent,
   ],
   entryComponents:[
+    DriverDetailComponent,
     OprateTipsModalComponent
   ],
   imports: [
