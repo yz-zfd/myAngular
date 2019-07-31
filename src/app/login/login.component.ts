@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.dataStream=this.http.post("http://localhost:8080/angularLogin",null,{headers:{'Content-Type': "application/x-www-form-urlencoded;charset=UTF-8"},params:{"username":"root","password":"123456"}})
+    this.dataStream=this.http.post("http://localhost:8080/loginOfAngular",null,{headers:{'Content-Type': "application/x-www-form-urlencoded;charset=UTF-8"},params:{"username":"root","password":"123456"}})
     this.dataStream.subscribe((data)=>{
-      if(data!=null){
+      if(data==true){
         this.router.navigateByUrl('driverList/');
         /*this.dataStream=this.http.get("http://localhost:8080/getAllDriver",{withCredentials: true})
         this.dataStream.subscribe((data)=>{
