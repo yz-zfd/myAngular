@@ -4,6 +4,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {OprateTipsModalComponent} from '../oprate-tips-modal/oprate-tips-modal.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar'
 @Component({
   selector: 'app-driver-detail',
   templateUrl: './driver-detail.component.html',
@@ -11,6 +12,8 @@ import {Observable} from 'rxjs';
 })
 
 export class DriverDetailComponent implements OnInit {
+
+
   //这个值是由BsModalRef注入的，在本类构造中
   driverSource:IDriver;
   //这里由于使用了双向绑定，需要设置一个copy对象，不然会实时更改数据（针对修改不提交的情况）
@@ -18,44 +21,17 @@ export class DriverDetailComponent implements OnInit {
   modalHeaderText: string;
   modalFooterText: string;
   editorStatus: string;
-
+  file:File;
   //http流
   dataStream:Observable<any>;
   //注入了一个目标modal，和一个modal服务，和一个http服务
   constructor(public modalRef: BsModalRef, private modalService: BsModalService,private http:HttpClient) {
-
   }
   ngOnInit(): void {
     //拷贝目标对象
     this.driver=new Driver();
     Object.assign(this.driver,this.driverSource);
-   /* //初始化标签
-    $("#photo").fileinput({
-      language:"zh",
-
-      maxFileCount:1,
-      layoutTemplates:{
-        actionUpload: '',
-        actionDelete: '',
-      },
-      showCaption:false,//是否显示标题
-      showUpload:false,//显示上传按钮
-      showRemove:false,
-      showPreview:false,
-      showClose:false,
-      browseClass:"btn btn-primary",//按钮样式
-    })
-    //选择文件后触发事件：（若是用户没有选择图片则不会触发，则默认为本身的图片）
-    $("#photo").on("filebatchselected", function(event, files) {
-      //新增图片后缀名判断
-      //这个方法很不错，将文件重新生成url给img
-      var $filePath=URL.createObjectURL(files[0]);
-      if(!($filePath.endsWith(".JPG") ||$filePath.endsWith(".PNG")||$filePath.endsWith(".JPRG"))){
-
-      }else{
-        $("#photoImg").attr("src",$filePath);
-      }
-    });*/
+    //设置图片路径：
 
   }
   //检查身份证日期格式并设置生日
@@ -143,19 +119,61 @@ export class DriverDetailComponent implements OnInit {
     }
   }
   submitForm(){
-    console.debug("提交表單")
-    var form=new FormData();
+    let formData = new FormData();
+
+    let a ={
+      id: 1,
+      name: "",
+
+
+
+
+    }
+    formData.append("id",this.driver.id+"")
+    formData.append("name",this.driver.name)
+    formData.append("nationality",this.driver.nationality)
+    formData.append("phone_number",this.driver.phone_number)
+    formData.append("marital_status",this.driver.marital_status+"")
+    formData.append("person_id",this.driver.person_id)
+    formData.append("company",this.driver.company)
+    formData.append("sex",this.driver.sex)
+    formData.append("foreign_language_ability",this.driver.foreign_language_ability)
+    formData.append("birthday",this.driver.birthday.toString())
+    formData.append("education",this.driver.education)
+    formData.append("file",this.file);
+    this.dataStream=this.http.post("http://localhost:8080/operateDriver",formData);
+    this.dataStream.subscribe((data)=>{
+      //输出结果modal
+      const initialState = {
+        'modalHeaderText': '提示',
+        'modalBodyText': this.checkText,
+        'modalFooterText': '我知道了',
+        'editorStatus': ''
+      };
+      if(true){
+        this.modalRef.hide();
+        this.checkText="操作成功"
+      }else{
+        this.checkText="操作失败，请重试"
+      }
+      this.modalService.show(OprateTipsModalComponent, {initialState, class: 'gray modal-sm'});
+    })
+  }
+  //图片更改事件
+  fileUpload($event,ele){
+    this.file = $event.target.files[0] ;
   }
   //图片显示---------------------------------------------------------------------------------------
-  photoCut(p) {
+  photoCut($event) {
 //图片加载完后设置大小
-    if (p.width>215 || p.height>146){
+    $event.target
+    if ($event.target.width>215 || $event.target.height>146){
       //下面只是为了保持图片的比例不让其失真
-      if (p.width/p.height>215/146){
-        p.width=215;
+      if ($event.target.width/$event.target.height>215/146){
+        $event.target.width=215;
       }
       else{
-        p.height=146;
+        $event.target.height=146;
       }
     }
   }

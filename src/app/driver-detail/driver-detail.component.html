@@ -102,15 +102,14 @@
         </div>
         <br/>
       </div>
-      <div class="col-xs-4 col-sm-4 col-xs-6 ">
-        <!--img用于图片回显-->
-        <div align="center">
-          <img id="photoImg" src="" (onload)="photoCut(this)"/>
-        </div>
+      <div class="col-xs-4 col-sm-4 col-xs-6 " align="center">
+        <img id="driverPhoto" src="http://localhost:8080/driverImg/{{driver.photo}}" (load)="photoCut($event)"/>
         <br/><br/>
-        <div class="file" data-provides="fileinput" id="uploadImgDiv" align="center">
-          <input type="file"  class="" name="photo" id="photo" >
-        </div>
+        <!--<nz-upload nzAction="http://localhost:8080/img" (nzChange)="fileUpload()">
+          <button nz-button [disabled]="editorStatus"><i nz-icon nzType="upload" ></i><span>上传头像</span></button>
+        </nz-upload>-->
+        <input id="saveFile" type="file" multiple="true" name="file"  class="form-control"
+               (change)="fileUpload($event,txDetailFm.controls['file'])" placeholder="上传文件" required>
       </div>
     </div>
     <br>

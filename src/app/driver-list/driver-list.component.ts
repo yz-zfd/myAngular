@@ -65,8 +65,6 @@ export class DriverListComponent implements OnInit {
   }
 
   editorDriver() {
-    console.debug(this.numberOfChecked);
-    //这里是
     if (this.listOfCheckedData.length == 1) {
       const initialState = {
         'modalHeaderText': '编辑页',
@@ -116,30 +114,12 @@ export class DriverListComponent implements OnInit {
 
   //初始化数据
   ngOnInit(): void {
-    /*this.dataStream=this.http.get("http://localhost:8080/getAllDriver");
+    this.dataStream=this.http.get("http://localhost:8080/getAllDriver");
     this.dataStream.subscribe(
       (data)=>{
         this.listOfAllData=data;
       }
-    )*/
-    let j = 1900;
-    for (let i = 0; i < 100; i++) {
-      this.listOfAllData.push({
-        //"张山山","中国","135"+(j+i)+"3588",false,"513022"+(j+i)+"02016694","yz","男","good",new Date(sdf.parse((j+i)+"-02-01").getTime()+24*3600*1000),"本科"
-        id: i,
-        name: '张山山' + i,
-        nationality: '中国',
-        phone_number: '135' + (j + i) + '3588',
-        marital_status: true,
-        person_id: '513022' + (j + i) + '02016694',
-        company: 'yz',
-        sex: '男',
-        foreign_language_ability: 'good',
-        birthday: new Date(),
-        education: '九年义务教育',
-        photo: 'c://',
-      });
-    }
+    )
   }
 }
 

@@ -15,10 +15,9 @@ export interface IDriver {
 export class Drivers {
   static driverList:IDriver[]=[];
 }
+export class myToken {
+  static tokenStr:string="";
 
-export class User{
-  username:string;
-  password:string;
 }
 export class Driver implements IDriver{
   id: number;
@@ -32,5 +31,5 @@ export class Driver implements IDriver{
   foreign_language_ability: string="";
   birthday: Date=new Date();
   education: string="";
-  photo: string="default";
+  photo: string="default.png";
 }
