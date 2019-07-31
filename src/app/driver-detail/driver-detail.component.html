@@ -105,11 +105,10 @@
       <div class="col-xs-4 col-sm-4 col-xs-6 " align="center">
         <img id="driverPhoto" src="http://localhost:8080/driverImg/{{driver.photo}}" (load)="photoCut($event)"/>
         <br/><br/>
-        <!--<nz-upload nzAction="http://localhost:8080/img" (nzChange)="fileUpload()">
+        <nz-upload nzAction="http://localhost:8080/uploadPhoto" [nzCustomRequest]="customReq">
           <button nz-button [disabled]="editorStatus"><i nz-icon nzType="upload" ></i><span>上传头像</span></button>
-        </nz-upload>-->
-        <input id="saveFile" type="file" multiple="true" name="file"  class="form-control"
-               (change)="fileUpload($event,txDetailFm.controls['file'])" placeholder="上传文件" required>
+        </nz-upload>
+
       </div>
     </div>
     <br>

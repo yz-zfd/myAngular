@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Driver, IDriver} from '../drivers';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {OprateTipsModalComponent} from '../oprate-tips-modal/oprate-tips-modal.component';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest, HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar'
+import {UploadXHRArgs} from 'ng-zorro-antd';
+
 @Component({
   selector: 'app-driver-detail',
   templateUrl: './driver-detail.component.html',
@@ -110,7 +112,7 @@ export class DriverDetailComponent implements OnInit {
             this.modalService.show(OprateTipsModalComponent, {initialState, class: 'gray modal-sm'});
             return;
           }
-          if(data=="true"){
+          if(data==""){
             this.submitForm();
             return;
           }
@@ -120,15 +122,6 @@ export class DriverDetailComponent implements OnInit {
   }
   submitForm(){
     let formData = new FormData();
-
-    let a ={
-      id: 1,
-      name: "",
-
-
-
-
-    }
     formData.append("id",this.driver.id+"")
     formData.append("name",this.driver.name)
     formData.append("nationality",this.driver.nationality)
@@ -159,10 +152,33 @@ export class DriverDetailComponent implements OnInit {
       this.modalService.show(OprateTipsModalComponent, {initialState, class: 'gray modal-sm'});
     })
   }
-  //图片更改事件
-  fileUpload($event,ele){
-    this.file = $event.target.files[0] ;
-  }
+  //图片上傳
+  customReq = (item: UploadXHRArgs) => {
+    // Create a FormData here to store files and other parameters.
+    const formData = new FormData();
+    // tslint:disable-next-line:no-any
+    formData.append('file', item.file as any);
+    formData.append('id', '1000');
+    const req = new HttpRequest('POST', item.action!, formData, {
+      reportProgress: true,
+      withCredentials: true
+    });
+    return this.http.request(req).subscribe(
+      (event: HttpEvent<{}>) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          if (event.total! > 0) {
+            (event as any).percent = (event.loaded / event.total!) * 100;
+          }
+          item.onProgress!(event, item.file!);
+        } else if (event instanceof HttpResponse) {
+          item.onSuccess!(event.body, item.file!, event);
+        }
+      },
+      err => {
+        item.onError!(err, item.file!);
+      }
+    );
+  };
   //图片显示---------------------------------------------------------------------------------------
   photoCut($event) {
 //图片加载完后设置大小
