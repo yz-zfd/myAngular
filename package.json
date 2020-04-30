@@ -23,7 +23,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-fileinput": "^5.0.4",
     "bootstrap-table": "^1.15.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-zorro-antd": "^8.1.0",
     "ngx-bootstrap": "^5.1.0",
     "rxjs": "~6.4.0",
